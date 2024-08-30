@@ -1,42 +1,37 @@
-# Modèles d'Analyse de Sentiment dans `model_sa.py`
+# Création du Modèle de Recommandation Attentional Sentiment and Confidence Aware Neural Recommender
 
 ## Description
 
-Dans le fichier `SA_modul.py`, plusieurs modèles d'analyse de sentiment ont été développés pour évaluer la polarité des commentaires collectés depuis la base de données IMDB. Les commentaires sont annotés avec un score binaire : 1 pour les sentiments positifs et 0 pour les sentiments négatifs.
+Ce projet vise à développer un système de recommandation avancé pour un cas d'utilisation e-commerce, en utilisant un modèle hybride combinant filtrage collaboratif et cognitif. Le modèle se base sur les évaluations et les commentaires des utilisateurs, qui ont été analysés à l'aide de plusieurs modèles d'analyse de sentiment. Chaque modèle d'analyse de sentiment est équipé d'une couche d'attention et d'un module de confiance pour améliorer la précision des recommandations.
 
-## Modèles Implémentés
+## Composants du Projet
 
-Les modèles suivants ont été créés et testés dans ce projet :
+### 1. **Analyse de Sentiment**
 
-- **LSTM (Long Short-Term Memory)**
-- **BiLSTM (Bidirectional LSTM)**
-- **LSTM-CNN**
-- **BiLSTM-CNN**
-- **LSTM-RNN**
-- **BiLSTM-RNN**
+- **Modèles Utilisés :** Plusieurs modèles d'analyse de sentiment ont été développés, notamment LSTM, BiLSTM, LSTM-CNN, BiLSTM-CNN, LSTM-RNN, et BiLSTM-RNN.
+- **Données d'Entraînement :** Les modèles ont été entraînés sur le dataset IMDB pour classer les commentaires en sentiments positifs ou négatifs.
 
-## Processus de Prétraitement
+### 2. **Filtrage Hybride**
 
-Les données ont été prétraitées avant d'être introduites dans les modèles :
+- **Filtrage Collaboratif :** Utilise les évaluations des utilisateurs pour générer des recommandations basées sur les comportements d'achat similaires entre les utilisateurs.
+- **Filtrage Cognitif :** Intègre les analyses de sentiment des commentaires pour affiner les recommandations en tenant compte des avis exprimés.
 
-1. **Collecte des Données :** Les commentaires sont extraits de la base de données IMDB.
-2. **Nettoyage des Données :** Les textes sont nettoyés pour enlever les caractères spéciaux, les balises HTML, etc.
-3. **Suppression des Mots Vides :** Les mots sans signification importante (mots vides) sont supprimés.
-4. **Padding :** Les séquences de texte sont normalisées à une longueur fixe à l'aide du padding.
-5. **Splitting :** Les données sont divisées en ensembles d'entraînement et de test.
-6. **Indexation :** Les mots sont convertis en indices numériques.
-7. **Création du Vocabulaire :** Un vocabulaire est créé à partir des mots indexés.
-8. **Utilisation de BERT :** Le modèle préentraîné BERT est utilisé pour obtenir les embeddings des mots, offrant une représentation dense et contextuelle de chaque mot.
+### 3. **Système d'Attention et Module de Confiance**
 
-## Entraînement des Modèles
+- **Couche d'Attention :** Chaque modèle d'analyse de sentiment inclut une couche d'attention pour focaliser le traitement sur les parties les plus significatives des commentaires.
+- **Module de Confiance :** Évalue la fiabilité des sentiments extraits pour ajuster l'impact des commentaires dans le système de recommandation.
 
-Les embeddings générés par BERT sont ensuite passés dans les modèles de réseaux de neurones listés ci-dessus. Chaque modèle a été entraîné et évalué sur les données prétraitées.
+### 4. **Entraînement des Modèles**
 
-## Résultats et Conclusion
+- **Analyse de Sentiment :** Entraînée sur le dataset IMDB pour obtenir des embeddings contextuels des commentaires.
+- **Filtrage Hybride :** Entraîné sur le dataset Amazon pour générer des recommandations précises basées sur les évaluations et les sentiments analysés.
 
-Après avoir testé tous les modèles, les résultats montrent que le modèle **BiLSTM-CNN** est celui qui obtient les meilleures performances. Cela est dû à la capacité de BiLSTM à capturer les relations contextuelles dans les deux directions (avant et arrière) et à la capacité des couches CNN à extraire des caractéristiques locales pertinentes, ce qui renforce la précision de la classification.
+## Fonctionnement
+
+Le système combine les résultats des modèles d'analyse de sentiment avec les techniques de filtrage collaboratif et cognitif pour fournir des recommandations personnalisées. Les évaluations et les commentaires des utilisateurs sont analysés pour créer des profils d'achat et des préférences affinées, intégrant des couches d'attention pour capturer les détails importants et un module de confiance pour valider les recommandations.
 
 ## Conclusion
 
-Le modèle BiLSTM-CNN a surpassé les autres modèles, montrant l'importance de combiner l'analyse contextuelle bidirectionnelle avec l'extraction de caractéristiques locales pour l'analyse de sentiment.
+Le modèle de recommandation Attentional Sentiment and Confidence Aware Neural Recommender combine des techniques avancées d'analyse de sentiment avec des approches hybrides de filtrage pour offrir des recommandations e-commerce précises et personnalisées, en prenant en compte à la fois les évaluations des utilisateurs et les sentiments exprimés dans les commentaires.
+
 
