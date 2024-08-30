@@ -1,60 +1,42 @@
-# Système de Recommandation basé sur l'Analyse de Sentiment et les Avis Faux
+# Modèles d'Analyse de Sentiment dans `model_sa.py`
 
-Ce projet vise à développer un système de recommandation personnalisé en se basant sur l'analyse de sentiment et la détection d'avis faux dans les commentaires. Le modèle est construit en utilisant des techniques de deep learning et des algorithmes de filtrage collaboratif.
+## Description
 
-## Objectif
+Dans le fichier `SA_modul.py`, plusieurs modèles d'analyse de sentiment ont été développés pour évaluer la polarité des commentaires collectés depuis la base de données IMDB. Les commentaires sont annotés avec un score binaire : 1 pour les sentiments positifs et 0 pour les sentiments négatifs.
 
-L'objectif principal de ce projet est de recommander des produits de manière personnalisée aux utilisateurs en tenant compte de leurs préférences et en filtrant les avis frauduleux.
+## Modèles Implémentés
 
-## Architecture du Modèle
+Les modèles suivants ont été créés et testés dans ce projet :
 
-Le modèle est construit en plusieurs étapes :
+- **LSTM (Long Short-Term Memory)**
+- **BiLSTM (Bidirectional LSTM)**
+- **LSTM-CNN**
+- **BiLSTM-CNN**
+- **LSTM-RNN**
+- **BiLSTM-RNN**
 
-1. **Collecte de Données** :
-   - Les données sont collectées à partir de l'ensemble de données IMDb pour construire un modèle capable de prédire le score de sentiment dans un commentaire.
+## Processus de Prétraitement
 
-2. **Prétraitement des Données** :
-   - Les données sont prétraitées en effectuant la tokenization, la suppression des mots vides, le padding, etc.
-   - Un vocabulaire est construit à partir des données et un modèle pré-entraîné BERT est utilisé pour représenter les mots sous forme de vecteurs (construction de vecteurs latents).
+Les données ont été prétraitées avant d'être introduites dans les modèles :
 
-3. **Modèles Hybrides** :
-   - Quatre modèles hybrides sont construits, chacun comprenant :
-     - Une couche CNN ou RNN pour l'extraction de caractéristiques.
-     - Une couche LSTM ou BiLSTM pour la modélisation de la séquence.
-     - Une couche d'attention pour se concentrer sur les parties importantes du commentaire.
-     - Une couche dense finale avec un seul neurone en sortie avec activation sigmoïde pour le score de sentiment.
+1. **Collecte des Données :** Les commentaires sont extraits de la base de données IMDB.
+2. **Nettoyage des Données :** Les textes sont nettoyés pour enlever les caractères spéciaux, les balises HTML, etc.
+3. **Suppression des Mots Vides :** Les mots sans signification importante (mots vides) sont supprimés.
+4. **Padding :** Les séquences de texte sont normalisées à une longueur fixe à l'aide du padding.
+5. **Splitting :** Les données sont divisées en ensembles d'entraînement et de test.
+6. **Indexation :** Les mots sont convertis en indices numériques.
+7. **Création du Vocabulaire :** Un vocabulaire est créé à partir des mots indexés.
+8. **Utilisation de BERT :** Le modèle préentraîné BERT est utilisé pour obtenir les embeddings des mots, offrant une représentation dense et contextuelle de chaque mot.
 
-4. **Matrice de Confiance** :
-   - Une matrice de confiance est utilisée pour améliorer la fiabilité et la précision des recommandations.
-   - Elle combine les évaluations des utilisateurs sur les produits avec la confiance associée aux commentaires analysés.
+## Entraînement des Modèles
 
-5. **Modèles de Filtrage** :
-   - Deux algorithmes de filtrage sont utilisés : GMF (Factorisation Matricielle Généralisée) et MLP (Perceptron Multi-Couches).
-   - Ces modèles de filtrage sont entraînés avec un ensemble de données provenant d'Amazon.
+Les embeddings générés par BERT sont ensuite passés dans les modèles de réseaux de neurones listés ci-dessus. Chaque modèle a été entraîné et évalué sur les données prétraitées.
 
-## Plus d'Informations
+## Résultats et Conclusion
 
-Pour plus de détails sur le projet, vous pouvez consulter le document de recherche suivant : [Lien vers le document](https://www.scitepress.org/Papers/2023/121930/121930.pdf).
+Après avoir testé tous les modèles, les résultats montrent que le modèle **BiLSTM-CNN** est celui qui obtient les meilleures performances. Cela est dû à la capacité de BiLSTM à capturer les relations contextuelles dans les deux directions (avant et arrière) et à la capacité des couches CNN à extraire des caractéristiques locales pertinentes, ce qui renforce la précision de la classification.
 
-## Installation
+## Conclusion
 
-Pour exécuter ce projet localement, suivez ces étapes :
-
-1. Assurez-vous d'avoir Python 3.x installé sur votre système.
-2. Installez les dépendances en exécutant `pip install -r requirements.txt`.
-
-## Utilisation
-
-1. Clonez ce dépôt sur votre machine.
-2. Exécutez les scripts de collecte de données, de prétraitement et de construction de modèles.
-3. Lancez le système de recommandation et testez-le avec de nouvelles données.
-
-## Contributions
-
-Les contributions sont les bienvenues ! Si vous avez des suggestions d'amélioration ou des correctifs à apporter, veuillez ouvrir une issue ou soumettre une pull request.
-
-## Licence
-
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
-
+Le modèle BiLSTM-CNN a surpassé les autres modèles, montrant l'importance de combiner l'analyse contextuelle bidirectionnelle avec l'extraction de caractéristiques locales pour l'analyse de sentiment.
 
