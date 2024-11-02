@@ -34,4 +34,8 @@ Le système combine les résultats des modèles d'analyse de sentiment avec les 
 
 Le modèle de recommandation Attentional Sentiment and Confidence Aware Neural Recommender combine des techniques avancées d'analyse de sentiment avec des approches hybrides de filtrage pour offrir des recommandations e-commerce précises et personnalisées, en prenant en compte à la fois les évaluations des utilisateurs et les sentiments exprimés dans les commentaires.
 
+## Contributeurs
+- [Fella DIB](github.com/felladib)
+- [Lina IGHILAZA](github.com/liAghZn)
+
 
